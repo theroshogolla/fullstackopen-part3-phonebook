@@ -7,28 +7,28 @@ mongoose.connect(connectionUrl, { useNewUrlParser: true, useUnifiedTopology: tru
 
 //create schema for a phonebook entry
 const personSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    minLength: 3,
-    unique: true
-  },
-  number: {
-    type: String,
-    required: true,
-    minLength: 8
-  }
+	name: {
+		type: String,
+		required: true,
+		minLength: 3,
+		unique: true
+	},
+	number: {
+		type: String,
+		required: true,
+		minLength: 8
+	}
 })
 
 personSchema.plugin(uniqueValidator)
 
 //edit the toJSON function so that a document's _id becomes an id string
 personSchema.set('toJSON', {
-  transform: (doc, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString()
-    delete returnedObject._id
-    delete returnedObject.__v
-  }
+	transform: (doc, returnedObject) => {
+		returnedObject.id = returnedObject._id.toString()
+		delete returnedObject._id
+		delete returnedObject.__v
+	}
 })
 
 //build a model from personSchema and export
